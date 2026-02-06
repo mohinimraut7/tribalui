@@ -1,0 +1,413 @@
+{
+  "collectorOffices": [
+    {
+      "region": "Konkan",
+      "district": "Mumbai City",
+      "email": "mahbom@nic.in",
+       "municipalities": [
+    {
+      "name": "Brihanmumbai Municipal Corporation (BMC / MCGM)",
+      "covers": "Mumbai City"
+    }
+  ]
+    },
+    {
+      "region": "Konkan",
+      "district": "Mumbai Suburban",
+      "email": "collectormsd@gmail.com",
+      "municipalities": [
+    {
+      "name": "Brihanmumbai Municipal Corporation (BMC / MCGM)",
+      "covers": "Mumbai Suburban"
+    }
+  ]
+    },
+    {
+      "region": "Konkan",
+      "district": "Palghar",
+      "email": "collectorpalghar@gmail.com",
+      "municipalities": [
+    {
+      "name": "Vasai-Virar City Municipal Corporation (VVCMC)",
+      "covers": "Vasai-Virar"
+    },
+    {
+      "name": "Palghar Municipal Council",
+      "locatedIn": "Palghar"
+    },
+    {
+      "name": "Jawhar Municipal Council",
+      "locatedIn": "Jawhar"
+    },
+    {
+      "name": "Dahanu Municipal Council",
+      "locatedIn": "Dahanu"
+    },
+    {
+      "name": "Vikramgad Nagar Panchayat",
+      "locatedIn": "Vikramgad"
+    }
+  ]
+    },
+    {
+      "region": "Konkan",
+      "district": "Raigad",
+      "email": "collector_raigad@maharashtra.gov.in"
+    },
+    {
+      "region": "Konkan",
+      "district": "Ratnagiri",
+      "email": "mahrat@nic.in"
+    },
+    {
+      "region": "Konkan",
+      "district": "Sindhudurg",
+      "email": "collector_sindhudurg@maharashtra.gov.in"
+    },
+    {
+      "region": "Konkan",
+      "district": "Thane",
+      "email": "collector_thane@maharashtra.gov.in",
+      "municipalities": [
+    {
+      "name": "Thane Municipal Corporation (TMC)"
+    },
+    {
+      "name": "Kalyan-Dombivli Municipal Corporation (KDMC)"
+    },
+    {
+      "name": "Navi Mumbai Municipal Corporation (NMMC)"
+    },
+    {
+      "name": "Mira-Bhayandar Municipal Corporation (MBMC)"
+    },
+    {
+      "name": "Bhiwandi-Nizampur City Municipal Corporation (BNCMC)"
+    },
+    {
+      "name": "Ulhasnagar Municipal Corporation (UMC)"
+    },
+    {
+      "name": "Ambernath Municipal Council"
+    },
+    {
+      "name": "Badlapur Municipal Council"
+    },
+    {
+      "name": "Kulgaon-Badlapur Municipal Council"
+    }
+  ]
+
+    },
+
+    {
+      "region": "Pune",
+      "district": "Kolhapur",
+      "email": "mahkolcol@nic.in",
+       "municipalities": [
+    {
+      "name": "Kolhapur Municipal Corporation (KMC)"
+    }
+  ]
+    },
+    {
+      "region": "Pune",
+      "district": "Pune",
+      "email": "mahpun@nic.in",
+       "municipalities": [
+    {
+      "name": "Pune Municipal Corporation (PMC)"
+    }
+  ]
+    },
+    {
+      "region": "Pune",
+      "district": "Sangli",
+      "email": "collectorsangli@nic.com",
+ "municipalities": [
+    {
+      "name": "Sangli-Miraj-Kupwad City Municipal Corporation (SMKMC)"
+    },
+    {
+      "name": " Pimpri-Chinchwad Municipal Corporation (PCMC)"
+    }
+   
+  ]
+
+      
+    },
+    {
+      "region": "Pune",
+      "district": "Satara",
+      "email": "mahsat@nic.in",
+       "municipalities": [
+    { "name": "Satara Municipal Council (Satara Nagar Parishad)" },
+    { "name": "Karad Municipal Council" },
+    { "name": "Phaltan Municipal Council" },
+    { "name": "Wai Municipal Council" },
+    { "name": "Panchgani Municipal Council" },
+    { "name": "Mahabaleshwar Municipal Council" },
+    { "name": "Lonand Municipal Council" },
+    { "name": "Koregaon Municipal Council" },
+    { "name": "Rahimatpur Municipal Council" },
+    { "name": "Mhaswad Municipal Council" }
+  ]
+
+    },
+    {
+      "region": "Pune",
+      "district": "Solapur",
+      "email": "mahsho@nic.in",
+      "municipalities": [
+    {
+      "name": "Solapur Municipal Corporation (SMC)"
+    }
+  ]
+      
+    },
+
+    {
+      "region": "Nashik",
+      "district": "Ahmednagar",
+      "email": "mahahm@nic.in",
+      "municipalities": [
+    { "name": "Ahmednagar Municipal Council (Nagar Parishad)" }
+  ]
+    },
+    {
+      "region": "Nashik",
+      "district": "Dhule",
+      "email": "mahdhu@nic.in",
+        "municipalities": [
+    {
+      "name": "Dhule City Municipal Corporation (DMCC)"
+    }
+  ]
+    },
+    {
+      "region": "Nashik",
+      "district": "Jalgaon",
+      "email": "ddcjalgaon@rediffmail.com",
+      "municipalities": [
+    {
+      "name": "Jalgaon City Municipal Corporation (JCMC)"
+    }
+  ]
+    },
+    {
+      "region": "Nashik",
+      "district": "Nandurbar",
+      "email": "collectornandurbar@gmail.com",
+      "municipalities": [
+    {
+      "name": "Nandurbar Municipal Council (Nagar Parishad)"
+    }
+  ]
+    },
+    {
+      "region": "Nashik",
+      "district": "Nashik",
+      "email": "collector_nashik@maharashtra.gov.in",
+      "municipalities": [
+    {
+      "name": "Nashik Municipal Corporation (NMC)"
+    }
+  ]
+    },
+
+    {
+      "region": "Aurangabad",
+      "district": "Aurangabad",
+      "email": "abdcoll@gmail.com",
+      "municipalities": [
+    {
+      "name": "Aurangabad Municipal Corporation (AMC)"
+    }
+  ]
+    },
+    {
+      "region": "Aurangabad",
+      "district": "Beed",
+      "email": "mahbee@nic.in",
+      "municipalities": [
+    {
+      "name": "Beed Municipal Council (Nagar Parishad)"
+    }
+  ]
+    },
+    {
+      "region": "Aurangabad",
+      "district": "Hingoli",
+      "email": "hincollector@gmail.com",
+       "municipalities": [
+    {
+      "name": "Hingoli Municipal Council (Nagar Parishad)"
+    }
+  ]
+    },
+    {
+      "region": "Aurangabad",
+      "district": "Jalna",
+      "email": "collector_jalna@maharashtra.gov.in",
+       "municipalities": [
+    {
+      "name": "Jalna Municipal Council (Nagar Parishad)"
+    }
+  ]
+    },
+    {
+      "region": "Aurangabad",
+      "district": "Latur",
+      "email": "mahlat@nic.in",
+      "municipalities": [
+    {
+      "name": "Latur Municipal Corporation"
+    }
+  ]
+    },
+    {
+      "region": "Aurangabad",
+      "district": "Nanded",
+      "email": "collectornanded1@gmail.com",
+        "municipalities": [
+    {
+      "name": "Nanded-Waghala City Municipal Corporation (NWCMC)"
+    }
+  ]
+    },
+   {
+  "region": "Aurangabad",
+  "district": "Osmanabad",
+  "email": "collectorosmanabad@gmail.com",
+  "municipalities": [
+    {
+      "name": "Osmanabad Municipal Council (Nagar Parishad)"
+    }
+  ]
+},
+    {
+      "region": "Aurangabad",
+      "district": "Parbhani",
+      "email": "pbncollector@rediffmail.com",
+      "municipalities": [
+    {
+      "name": "Parbhani Municipal Council (Nagar Parishad)"
+    }
+  ]
+    },
+
+    {
+      "region": "Amravati",
+      "district": "Akola",
+      "email": "mahako@nic.in",
+       "municipalities": [
+    {
+      "name": "Akola Municipal Corporation"
+    }
+  ]
+    },
+    {
+      "region": "Amravati",
+      "district": "Amravati",
+      "email": "collector_amravati@maharashtra.gov.in",
+       "municipalities": [
+    {
+      "name": "Amravati Municipal Corporation"
+    }
+  ]
+    },
+    {
+      "region": "Amravati",
+      "district": "Buldhana",
+      "email": "collectorbul@gmail.com",
+      "municipalities": [
+    {
+      "name": "Buldhana Municipal Council (Nagar Parishad)"
+    }
+  ]
+      
+    },
+    {
+      "region": "Amravati",
+      "district": "Washim",
+      "email": "coll_washim@rediffmail.com",
+      "municipalities": [
+    {
+      "name": "Washim Municipal Council (Nagar Parishad)"
+    }
+  ]
+    },
+    {
+      "region": "Amravati",
+      "district": "Yavatmal",
+      "email": "coll_yavatmal@rediffmail.com",
+      "municipalities": [
+    {
+      "name": "Yavatmal Municipal Council (Nagar Parishad)"
+    }
+  ]
+    },
+
+    {
+      "region": "Nagpur",
+      "district": "Bhandara",
+      "email": "collectorbhandara@gmail.com",
+       "municipalities": [
+    {
+      "name": "Bhandara Municipal Council (Nagar Parishad)"
+    }
+  ]
+    },
+    {
+      "region": "Nagpur",
+      "district": "Chandrapur",
+      "email": "collector_chandrapur@maharashtra.gov.in",
+      "municipalities": [
+    {
+      "name": "Chandrapur Municipal Council (Nagar Parishad)"
+    }
+  ]
+    },
+    {
+      "region": "Nagpur",
+      "district": "Gadchiroli",
+      "email": "mahgad@nic.in",
+        "municipalities": [
+    {
+      "name": "Gadchiroli Municipal Council (Nagar Parishad)"
+    }
+  ]
+    },
+    {
+      "region": "Nagpur",
+      "district": "Gondiya",
+      "email": "collector_gondia@maharashtra.gov.in",
+        "municipalities": [
+    {
+      "name": "Gondiya Municipal Council (Nagar Parishad)"
+    }
+  ]
+    },
+    {
+      "region": "Nagpur",
+      "district": "Nagpur",
+      "email": "collector_nagpur@maharashtra.gov.in",
+       "municipalities": [
+    {
+      "name": "Nagpur Municipal Corporation (NMC)"
+    }
+  ]
+
+    },
+    {
+      "region": "Nagpur",
+      "district": "Wardha",
+      "email": "mahwar@nic.in",
+        "municipalities": [
+    {
+      "name": "Wardha Municipal Council (Nagar Parishad)"
+    }
+  ]
+    }
+  ]
+}

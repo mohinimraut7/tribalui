@@ -1,0 +1,91 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "role": "Collector Office",
+      "password": "collector@123",
+      "name": "Collector Admin",
+      "region": "Konkan",
+      "collectorOffice": "Mumbai City"
+    },
+    {
+      "id": 2,
+      "role": "Corporation / NagarPalika",
+      "password": "corporation@123",
+      "name": "Corporation Admin",
+      "district": "Mumbai City",
+      "municipality": "Brihanmumbai Municipal Corporation (BMC / MCGM)"
+    },
+    {
+      "id": 3,
+      "role": "Grampanchayat",
+      "password": "gram@123",
+      "name": "Grampanchayat Admin"
+    }
+  ],
+  "revenue": [
+    {
+      "id": 1769095877390,
+      "totalRevenue": 8000000,
+      "allocatedAmount": 400000,
+      "date": "22/01/2026",
+      "role": "Collector Office"
+    },
+    {
+      "id": 1769155865210,
+      "totalRevenue": 50000,
+      "allocatedAmount": 2500,
+      "date": "23/01/2026",
+      "role": "Corporation / NagarPalika"
+    },
+    {
+      "id": 1769157264603,
+      "totalRevenue": 4343434,
+      "allocatedAmount": 217171.7,
+      "date": "23/01/2026",
+      "role": "Collector Office"
+    },
+    {
+      "id": 1769157301589,
+      "totalRevenue": 444444,
+      "allocatedAmount": 22222.2,
+      "date": "23/01/2026",
+      "role": "Grampanchayat"
+    },
+    {
+      "id": 1769158898368,
+      "totalRevenue": 400000,
+      "allocatedAmount": 20000,
+      "date": "23/01/2026",
+      "role": "Corporation / NagarPalika"
+    },
+    {
+      "id": 1769167808672,
+      "totalRevenue": 800,
+      "allocatedAmount": 24,
+      "date": "23/01/2026",
+      "role": "Collector Office"
+    },
+    {
+      "id": 1769168807143,
+      "totalRevenue": 400,
+      "allocatedAmount": 12,
+      "date": "23/01/2026",
+      "role": "Collector Office"
+    },
+    {
+      "id": 1769168928470,
+      "totalRevenue": 600,
+      "allocatedAmount": 18,
+      "date": "23/01/2026",
+      "role": "Corporation / NagarPalika"
+    },
+    {
+      "id": 1769170956798,
+      "totalRevenue": 8000,
+      "allocatedAmount": 240,
+      "date": "23/01/2026",
+      "role": "Grampanchayat"
+    }
+  ]
+}
