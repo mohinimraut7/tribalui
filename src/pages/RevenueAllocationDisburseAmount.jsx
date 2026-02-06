@@ -417,7 +417,7 @@ const handleOrderNoChange = async (value) => {
 </div>
 
  <input
-  placeholder="Order No>>>>"
+  placeholder="Order No"
   value={orderNo}
   onChange={(e) => handleOrderNoChange(e.target.value)}
   className="w-full border p-2 mb-2"
