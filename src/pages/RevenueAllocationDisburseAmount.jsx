@@ -346,7 +346,7 @@ const handleOrderNoChange = async (value) => {
 
 
       {/* TABLE */}
-      <div className="bg-white rounded-2xl shadow border mt-4">
+      {/* <div className="bg-white rounded-2xl shadow border mt-4">
         <table className="w-full text-sm">
           <thead className="bg-gray-50">
             <tr>
@@ -396,7 +396,51 @@ const handleOrderNoChange = async (value) => {
 </tbody>
 
         </table>
-      </div>
+      </div> */}
+
+      <div className="bg-white rounded-2xl shadow border mt-4 overflow-hidden">
+  <div className="w-full overflow-x-auto">
+    <table className="min-w-max w-full text-sm">
+      <thead className="bg-gray-50">
+        <tr>
+          <th className="px-5 py-3 text-left">FY</th>
+          <th className="px-5 py-3 text-left">Order No</th>
+          <th className="px-5 py-3 text-left">Sanctioned</th>
+          <th className="px-5 py-3 text-left">Spent</th>
+          <th className="px-5 py-3 text-left">Pending</th>
+          <th className="px-5 py-3 text-left">Document</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {filteredActivities.map((a) => (
+          <tr key={a._id} className="border-t">
+            <td className="px-5 py-3">{a.financialYear}</td>
+            <td className="px-5 py-3">{a.orderNo}</td>
+            <td className="px-5 py-3">{a.subject || "-"}</td>
+            <td className="px-5 py-3 text-red-600">
+              ₹{a.disburseAmount}
+            </td>
+            <td className="px-5 py-3 text-green-700 font-semibold">
+              ₹{a.pendingAmount}
+            </td>
+            <td className="px-6 py-4">
+              <a
+                href={a.attachmentUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-600 underline"
+              >
+                {a.attachmentName}
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
       {/* ADD ACTIVITY MODAL */}
       {openAddActivityModal && (
