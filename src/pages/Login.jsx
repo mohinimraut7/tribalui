@@ -4,6 +4,11 @@ import { loginSuccess } from "../redux/slices/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 import bgImage from "../assets/bg.webp";
 import axiosInstance from "../services/axiosInstance";
+import Loader from "../components/common/Loader";
+
+
+
+
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -13,6 +18,9 @@ export default function Login() {
     userName: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState(false);
+
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -32,6 +40,7 @@ export default function Login() {
     }
 
     try {
+         setLoading(true); // ✅ start loader
       const res = await axiosInstance.post("/login", {
         userName: form.userName,
         password: form.password,
@@ -41,6 +50,7 @@ export default function Login() {
 
       if (!data.success) {
         alert(data.message);
+        setLoading(false);
         return;
       }
 
@@ -67,11 +77,16 @@ export default function Login() {
         error?.response?.data?.message ||
         "Server error. Backend चालू आहे का?";
       alert(msg);
-    }
+    }finally {
+    setLoading(false); // ✅ stop loader
+  }
   };
 
   return (
-    <div
+<>
+{loading && <Loader />}
+
+<div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
@@ -162,5 +177,8 @@ export default function Login() {
 
       </div>
     </div>
+</>
+    
+    
   );
 }

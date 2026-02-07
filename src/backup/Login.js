@@ -12,111 +12,37 @@
       role: "collector",
       username: "",
       password: "",
-      region: "", // ✅ collector role साठी
-      collectorOffice: "", // ✅ district (collector role साठी)
-      corporationDistrict: "", // ✅ corporation role साठी (district)
-      municipality: "", // ✅ corporation role साठी (municipality/corporation)
+      region: "", 
+      collectorOffice: "", 
+      corporationDistrict: "", 
+      municipality: "", 
     });
 
     const handleChange = (e) => {
       setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    // ✅ Unique Regions (collector role साठी)
     const regions = [
       ...new Set(collectorData.collectorOffices.map((o) => o.region)),
     ];
 
-    // ✅ Filter offices by selected region (collector role साठी)
+   
     const filteredOffices = collectorData.collectorOffices.filter(
       (o) => o.region === form.region
     );
 
-    // ✅ All districts (corporation role साठी)
+    
     const districts = collectorData.collectorOffices.map((o) => o.district);
 
-    // ✅ Corporation role: selected district object
+   
     const selectedDistrictObj = collectorData.collectorOffices.find(
       (o) => o.district === form.corporationDistrict
     );
 
-    // ✅ Corporation role: municipalities list
+   
     const municipalityList = selectedDistrictObj?.municipalities || [];
 
-    // const handleLogin = async (e) => {
-    //   e.preventDefault();
 
-    //   if (!form.password) {
-    //     alert("Password टाका ✅");
-    //     return;
-    //   }
-
-    //   // ✅ Collector validation
-    //   if (form.role === "collector" && !form.region) {
-    //     alert("Region निवडा ✅");
-    //     return;
-    //   }
-    //   if (form.role === "collector" && !form.collectorOffice) {
-    //     alert("Collector Office निवडा ✅");
-    //     return;
-    //   }
-
-    //   // ✅ Corporation validation
-    //   if (form.role === "corporation" && !form.corporationDistrict) {
-    //     alert("District निवडा ✅");
-    //     return;
-    //   }
-    //   if (form.role === "corporation" && !form.municipality) {
-    //     alert("Corporation / NagarPalika निवडा ✅");
-    //     return;
-    //   }
-
-    //   // 🔁 Role mapping (UI → Backend)
-    //   const roleMap = {
-    //     collector: "Collector Office",
-    //     corporation: "Corporation / NagarPalika",
-    //     grampanchayat: "Grampanchayat",
-    //   };
-
-    //   try {
-    //     const res = await fetch("http://localhost:3001/login", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         role: roleMap[form.role],
-    //         password: form.password,
-    //       }),
-    //     });
-
-    //     const data = await res.json();
-
-    //     if (data.success) {
-    //       dispatch(
-    //         loginSuccess({
-    //           name: data.user.name,
-    //           role: data.user.role,
-
-    //           // ✅ collector role info
-    //           region: form.region,
-    //           collectorOffice: form.collectorOffice,
-
-    //           // ✅ corporation role info
-    //           corporationDistrict: form.corporationDistrict,
-    //           municipality: form.municipality,
-    //         })
-    //       );
-    //       navigate("/dashboard");
-    //     } else {
-    //       alert(data.message || "Login failed");
-    //     }
-    //   } catch (error) {
-    //     alert("Server error. JSON Server चालू आहे का?");
-    //   }
-    // };
-
-    
     const handleLogin = async (e) => {
     e.preventDefault();
 
