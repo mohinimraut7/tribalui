@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import axiosInstance from "../services/axiosInstance";
 import { FiSearch, FiRefreshCw } from "react-icons/fi";
 import { toast } from "react-toastify";
+import Loader from "../components/common/Loader";
 
 
 /* ---------- FY HELPER ---------- */
@@ -239,12 +240,12 @@ const handleOrderNoChange = async (value) => {
     const amount = Number(disburseAmount);
 
     if (!amount || amount <= 0) {
-      alert("Enter valid amount");
+      toast.error("Enter valid amount");
       return;
     }
 
     if (amount > selectedActivity.pendingAmount) {
-      alert("Amount exceeds pending");
+      toast.error("Amount exceeds pending");
       return;
     }
 
@@ -279,7 +280,7 @@ const handleOrderNoChange = async (value) => {
   const handleSaveActivity = async () => {
   try {
     if (!orderDate) {
-      alert("Please select Order Date");
+      toast.error("Please select Order Date");
       return;
     }
 
@@ -293,7 +294,7 @@ const handleOrderNoChange = async (value) => {
     fd.append("financialYear", financialYear);
 
     if (!attachment) {
-      alert("Attach document");
+      toast.error("Attach document");
       return;
     }
 
@@ -315,7 +316,7 @@ const handleOrderNoChange = async (value) => {
     setAttachment(null);
 
   } catch (err) {
-    alert("Failed to add activity");
+    toast.error("Failed to add activity");
   }
 };
 
@@ -328,9 +329,17 @@ const handleClearFilters = () => {
 };
 
 
+
+
+
+
+
   /* ---------- UI ---------- */
   return (
-    <div className="p-6 bg-gray-50 min-h-full">
+<>
+{loading && <Loader />}
+
+ <div className="p-6 bg-gray-50 min-h-full">
 
       {/* <button
         onClick={() => setOpenAddActivityModal(true)}
@@ -579,5 +588,9 @@ const handleClearFilters = () => {
       )}
 
     </div>
+</>
+
+    
+   
   );
 }
