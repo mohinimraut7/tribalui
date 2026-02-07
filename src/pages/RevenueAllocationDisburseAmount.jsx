@@ -77,6 +77,9 @@ const [isFyFromOrder, setIsFyFromOrder] = useState(false);
   const [filterFY, setFilterFY] = useState("All");
 const [searchOrderNo, setSearchOrderNo] = useState("");
 
+const [debounceTimer, setDebounceTimer] = useState(null);
+
+
 
   const { startDate, endDate } = getDateRangeFromFY(financialYear);
 
@@ -96,65 +99,58 @@ const [searchOrderNo, setSearchOrderNo] = useState("");
 
 //     if (res.data?.financialYear) {
 //       setFinancialYear(res.data.financialYear);
-//       setIsFyFromOrder(true);   // ✅ hide dropdown
-//     } else {
-//       setIsFyFromOrder(false);
-//     }
-//   } catch (err) {
-//     setIsFyFromOrder(false);
-//   }
-// };
-
-
-
-// const handleOrderNoChange = async (value) => {
-//   setOrderNo(value);
-
-//   if (!value || value.length < 3) {
-//     setIsFyFromOrder(false);
-//     return;
-//   }
-
-//   try {
-//     const res = await axiosInstance.get(
-//       `/revenue/fy/${encodeURIComponent(value)}`
-//     );
-
-//     if (res.data?.financialYear) {
-//       setFinancialYear(res.data.financialYear);
-//       setIsFyFromOrder(true); // hide dropdown
+//       setIsFyFromOrder(true);
 //     } else {
 //       setIsFyFromOrder(false);
 //       toast.error("Financial year not found. Please add revenue first.");
+
+//       // ✅ close modal
+//       setOpenAddActivityModal(false);
 //       return;
 //     }
 //   } catch (err) {
 //     setIsFyFromOrder(false);
 //     toast.error("Financial year not found. Please add revenue first.");
+
+//     // ✅ close modal
+//     setOpenAddActivityModal(false);
 //     return;
 //   }
 // };
 
-
-
+  
 
 const handleOrderNoChange = async (value) => {
   setOrderNo(value);
 
-  if (!value || value.length < 3) {
-    setIsFyFromOrder(false);
-    return;
+  if (debounceTimer) {
+    clearTimeout(debounceTimer);
   }
 
-  try {
-    const res = await axiosInstance.get(
-      `/revenue/fy/${encodeURIComponent(value)}`
-    );
+  const timer = setTimeout(async () => {
 
-    if (res.data?.financialYear) {
-      setFinancialYear(res.data.financialYear);
-      setIsFyFromOrder(true);
-    } else {
+    if (!value || value.length < 3) {
+      setIsFyFromOrder(false);
+      return;
+    }
+
+    try {
+      const res = await axiosInstance.get(
+        `/revenue/fy/${encodeURIComponent(value)}`
+      );
+
+      if (res.data?.financialYear) {
+        setFinancialYear(res.data.financialYear);
+        setIsFyFromOrder(true);
+      } else {
+        setIsFyFromOrder(false);
+        toast.error("Financial year not found. Please add revenue first.");
+
+        // ✅ close modal
+        setOpenAddActivityModal(false);
+        return;
+      }
+    } catch (err) {
       setIsFyFromOrder(false);
       toast.error("Financial year not found. Please add revenue first.");
 
@@ -162,21 +158,17 @@ const handleOrderNoChange = async (value) => {
       setOpenAddActivityModal(false);
       return;
     }
-  } catch (err) {
-    setIsFyFromOrder(false);
-    toast.error("Financial year not found. Please add revenue first.");
 
-    // ✅ close modal
-    setOpenAddActivityModal(false);
-    return;
-  }
+  }, 500); // delay
+
+  setDebounceTimer(timer);
 };
 
 
 
 
 
-  /* ---------- RESET DATE IF OUTSIDE FY ---------- */
+/* ---------- RESET DATE IF OUTSIDE FY ---------- */
   useEffect(() => {
     if (orderDate && (orderDate < startDate || orderDate > endDate)) {
       setOrderDate("");
@@ -282,6 +274,52 @@ const handleOrderNoChange = async (value) => {
     }
   };
 
+
+
+  const handleSaveActivity = async () => {
+  try {
+    if (!orderDate) {
+      alert("Please select Order Date");
+      return;
+    }
+
+    const fd = new FormData();
+
+    fd.append("sanctionedOrderDate", orderDate);
+    fd.append("orderNo", orderNo);
+    fd.append("disburseAmount", disburseAmount);
+    fd.append("subject", subject);
+    fd.append("details", details);
+    fd.append("financialYear", financialYear);
+
+    if (!attachment) {
+      alert("Attach document");
+      return;
+    }
+
+    fd.append("attachment", attachment);
+
+    await axiosInstance.post("/revenue/activity", fd);
+
+    toast.success("Activity added successfully ✅");
+
+    setOpenAddActivityModal(false);
+    fetchAllActivities();
+
+    // reset form
+    setOrderDate("");
+    setOrderNo("");
+    setDisburseAmount("");
+    setSubject("");
+    setDetails("");
+    setAttachment(null);
+
+  } catch (err) {
+    alert("Failed to add activity");
+  }
+};
+
+
   /* ---------- UI ---------- */
   return (
     <div className="p-6 bg-gray-50 min-h-full">
@@ -296,7 +334,7 @@ const handleOrderNoChange = async (value) => {
 
 <div className="bg-white shadow rounded-xl p-3 mt-4 flex flex-wrap sm:flex-nowrap sm:items-center gap-3">
 
-  {/* Search */}
+
   <div className="flex items-center border rounded px-2 flex-1 min-w-[200px]">
     <FiSearch />
     <input
@@ -339,64 +377,7 @@ const handleOrderNoChange = async (value) => {
 
 )}
 
-
-
 </div>
-
-
-
-      {/* TABLE */}
-      {/* <div className="bg-white rounded-2xl shadow border mt-4">
-        <table className="w-full text-sm">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-5 py-3 text-left">FY</th>
-              <th className="px-5 py-3 text-left">Order No</th>
-              <th className="px-5 py-3 text-left">Sanctioned</th>
-              <th className="px-5 py-3 text-left">Spent</th>
-              <th className="px-5 py-3 text-left">Pending</th>
-               <th className="px-5 py-3 text-left">Document</th>
-            </tr>
-          </thead>
-
-        
-          <tbody>
-  {filteredActivities.map((a) => (
-    <tr key={a._id} className="border-t">
-      <td className="px-5 py-3">{a.financialYear}</td>
-
-      <td className="px-5 py-3">{a.orderNo}</td>
-
-      <td className="px-5 py-3">
-        {a.subject || "-"}
-      </td>
-
-      <td className="px-5 py-3 text-red-600">
-        ₹{a.disburseAmount}
-      </td>
-
-      <td className="px-5 py-3 text-green-700 font-semibold">
-        ₹{a.pendingAmount}
-      </td>
-
-  <td className="px-6 py-4">
-                    <a
-                      href={a.attachmentUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-blue-600 underline"
-                    >
-                      {a.attachmentName}
-                    </a>
-                  </td>
-
-
-    </tr>
-  ))}
-</tbody>
-
-        </table>
-      </div> */}
 
       <div className="bg-white rounded-2xl shadow border mt-4 overflow-hidden">
   <div className="w-full overflow-x-auto">
@@ -406,7 +387,7 @@ const handleOrderNoChange = async (value) => {
           <th className="px-5 py-3 text-left">FY</th>
           <th className="px-5 py-3 text-left">Order No</th>
           <th className="px-5 py-3 text-left">Sanctioned</th>
-          <th className="px-5 py-3 text-left">Spent</th>
+          <th className="px-5 py-3 text-left">Disburse Amt.</th>
           <th className="px-5 py-3 text-left">Pending</th>
           <th className="px-5 py-3 text-left">Document</th>
         </tr>
@@ -441,13 +422,10 @@ const handleOrderNoChange = async (value) => {
   </div>
 </div>
 
-
       {/* ADD ACTIVITY MODAL */}
       {openAddActivityModal && (
         <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
           <div className="bg-white w-full max-w-xl p-6 rounded-xl">
-
-
 
   <div className="flex justify-between items-center mb-3 w-full">
   <h2 className="font-bold">Add Activity</h2>
@@ -497,10 +475,6 @@ const handleOrderNoChange = async (value) => {
               max={endDate}
               className="w-full border p-2 mb-2"
             />
-
-
-           
-
             <input
               type="number"
               placeholder="Disburse Amount"
@@ -528,10 +502,7 @@ const handleOrderNoChange = async (value) => {
   className="w-full border p-2 mb-3"
 />
 
-
-
-
-             <button
+  {/* <button
     onClick={async () => {
       try {
 
@@ -575,7 +546,16 @@ const handleOrderNoChange = async (value) => {
     className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
   >
     Save Activity
-  </button>
+  </button> */}
+
+
+<button
+  onClick={handleSaveActivity}
+  className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+>
+  Save Activity
+</button>
+
 
           </div>
         </div>
