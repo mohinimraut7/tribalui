@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import bgImage from "../assets/bg.webp";
 import axiosInstance from "../services/axiosInstance";
 import Loader from "../components/common/Loader";
+import { toast } from "react-toastify";
 
 
 
@@ -30,12 +31,12 @@ export default function Login() {
     e.preventDefault();
 
     if (!form.userName.trim()) {
-      alert("Username टाका ✅");
+      toast.error("Username टाका ✅");
       return;
     }
 
     if (!form.password) {
-      alert("Password टाका ✅");
+      toast.error("Password टाका ✅");
       return;
     }
 
@@ -49,7 +50,8 @@ export default function Login() {
       const data = res.data;
 
       if (!data.success) {
-        alert(data.message);
+        // toast.success(data.message);
+        toast.error(data.message);
         setLoading(false);
         return;
       }
@@ -70,13 +72,15 @@ export default function Login() {
       localStorage.setItem("authUser", JSON.stringify(userPayload));
       localStorage.setItem("userRole", data.user.role);
 
+      toast.success("Login successful ✅");
       navigate("/dashboard");
 
     } catch (error) {
       const msg =
         error?.response?.data?.message ||
         "Server error. Backend चालू आहे का?";
-      alert(msg);
+      // alert(msg);
+      toast.error(msg)
     }finally {
     setLoading(false); // ✅ stop loader
   }

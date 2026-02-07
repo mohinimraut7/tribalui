@@ -395,7 +395,8 @@ const handleOrderNoChange = async (value) => {
         <tr>
           <th className="px-5 py-3 text-left">FY</th>
           <th className="px-5 py-3 text-left">Order No</th>
-          <th className="px-5 py-3 text-left">Sanctioned</th>
+          <th className="px-5 py-3 text-left">Subject</th>
+           <th className="px-5 py-3 text-left">Details</th>
           <th className="px-5 py-3 text-left">Disburse Amt.</th>
           <th className="px-5 py-3 text-left">Pending</th>
           <th className="px-5 py-3 text-left">Document</th>
@@ -408,6 +409,7 @@ const handleOrderNoChange = async (value) => {
             <td className="px-5 py-3">{a.financialYear}</td>
             <td className="px-5 py-3">{a.orderNo}</td>
             <td className="px-5 py-3">{a.subject || "-"}</td>
+            <td className="px-5 py-3">{a.details || "-"}</td>
             <td className="px-5 py-3 text-red-600">
               ₹{a.disburseAmount}
             </td>
