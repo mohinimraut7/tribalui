@@ -359,12 +359,12 @@ const handleOrderNoChange = async (value) => {
   </div>
 
   {/* Refresh */}
-  <button
+  {/* <button
     onClick={fetchAllActivities}
     className="p-2 border rounded"
   >
     <FiRefreshCw size={18} />
-  </button>
+  </button> */}
 
   
 
