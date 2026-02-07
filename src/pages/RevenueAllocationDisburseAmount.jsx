@@ -366,25 +366,31 @@ const handleOrderNoChange = async (value) => {
     <FiRefreshCw size={18} />
   </button> */}
 
-  
 
-{isFyFromOrder ? (
-  <div className="w-full border p-2 mb-2 bg-gray-100">
-    {financialYear}
-  </div>
-) : (
 
-<select
+  <select
   className="w-full border p-2 mb-2"
   value={financialYear}
-  onChange={(e) => setFinancialYear(e.target.value)}
+  // onChange={(e) => setFinancialYear(e.target.value)}
+  onChange={(e) => {
+    setFinancialYear(e.target.value);
+    setFilterFY(e.target.value); // ✅ table filter
+  }}
 >
   {financialYears.map((fy) => (
     <option key={fy}>{fy}</option>
   ))}
 </select>
 
-)}
+{/* {isFyFromOrder ? (
+  <div className="w-full border p-2 mb-2 bg-gray-100">
+    {financialYear}
+  </div>
+) : (
+
+
+
+)} */}
 
 </div>
 
