@@ -320,6 +320,14 @@ const handleOrderNoChange = async (value) => {
 };
 
 
+const handleClearFilters = () => {
+  setSearchOrderNo("");
+  setFilterFY("All");
+  setFinancialYear(financialYears[0]);
+  setFilteredActivities(activities);
+};
+
+
   /* ---------- UI ---------- */
   return (
     <div className="p-6 bg-gray-50 min-h-full">
@@ -344,7 +352,7 @@ const handleOrderNoChange = async (value) => {
 <div className="bg-white shadow rounded-xl p-3 mt-4 flex flex-wrap sm:flex-nowrap sm:items-center gap-3">
 
 
-  <div className="flex items-center border rounded px-2 flex-1 min-w-[200px]">
+  <div className="flex items-center border rounded px-2 w-[300px]">
     <FiSearch />
     <input
       placeholder="Search Order No"
@@ -352,10 +360,6 @@ const handleOrderNoChange = async (value) => {
       value={searchOrderNo}
       onChange={(e) => setSearchOrderNo(e.target.value)}
     />
-
- 
-
-
   </div>
 
   {/* Refresh */}
@@ -366,10 +370,17 @@ const handleOrderNoChange = async (value) => {
     <FiRefreshCw size={18} />
   </button> */}
 
+<button
+  onClick={handleClearFilters}
+  className="p-2 border rounded"
+  title="Clear Filters"
+>
+  <FiRefreshCw size={18} />
+</button>
 
 
   <select
-  className="w-full border p-2 mb-2"
+  className="border rounded px-2 py-1 w-[200px]"
   value={financialYear}
   onChange={(e) => {
     setFinancialYear(e.target.value);
