@@ -284,6 +284,7 @@ const handleOrderNoChange = async (value) => {
       return;
     }
 
+    setLoading(true); // ✅ START loader
     const fd = new FormData();
 
     fd.append("sanctionedOrderDate", orderDate);
