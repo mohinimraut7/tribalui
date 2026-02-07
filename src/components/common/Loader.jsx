@@ -9,9 +9,9 @@ export default function Loader() {
       </div>
 
       {/* Text */}
-      <p className="text-blue-700 font-semibold text-lg animate-pulse">
+      {/* <p className="text-blue-700 font-semibold text-lg animate-pulse">
         Signing you in...
-      </p>
+      </p> */}
 
     </div>
   );

@@ -318,6 +318,8 @@ const handleOrderNoChange = async (value) => {
 
   } catch (err) {
     toast.error("Failed to add activity");
+  }finally {
+    setLoading(false); // ✅ ALWAYS STOP loader
   }
 };
 
