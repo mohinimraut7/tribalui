@@ -30,6 +30,14 @@ export default function RevenueAllocation() {
 
   const userrole = localStorage.getItem("userRole");
 
+
+  const user = JSON.parse(localStorage.getItem("authUser"));
+
+
+
+
+
+
   /* ===============================
       FETCH ALL REVENUE
   =============================== */
@@ -241,21 +249,21 @@ if (!attachment) return toast.error("Attach document");
 
 
 
+<div className="w-full">
+  <label className="block text-sm font-medium text-gray-700 mb-1">
+    Department
+  </label>
 
-            <select
-  value={departmentName}
-  onChange={(e) => setDepartmentName(e.target.value)}
-  className="w-full border px-4 py-3 rounded-xl"
->
-  <option value="">Select Department</option>
-  <option value="Tribal">Tribal</option>
-  <option value="WCD">WCD</option>
-  <option value="PWD">PWD</option>
-  <option value="Health Department">Health Department</option>
-  <option value="Social Justice">Social Justice</option>
-  <option value="Minority Development">Minority Development</option>
-  <option value="Food & Civil Supplies">Food & Civil Supplies</option>
-</select>
+  <input
+    type="text"
+    value={user?.departmentName || ""}
+    disabled
+    className="w-full px-3 py-2 border rounded-md bg-gray-100 text-gray-700 cursor-not-allowed"
+  />
+</div>
+
+
+
 
 
             <select
