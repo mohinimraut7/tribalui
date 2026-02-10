@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../services/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loader from "../components/common/Loader";
 
 export default function RevenueAllocation() {
   const [open, setOpen] = useState(false);
@@ -253,7 +254,16 @@ if (!attachment) return toast.error("Attach document");
       {/* Modal */}
       {open && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
-          <div className="bg-white rounded-2xl w-full max-w-lg shadow-xl p-4 sm:p-6 space-y-4 mx-3">
+          {/* <div className="bg-white rounded-2xl w-full max-w-lg shadow-xl p-4 sm:p-6 space-y-4 mx-3"> */}
+
+
+
+          <div className="bg-white rounded-2xl w-full max-w-lg shadow-xl p-4 sm:p-6 space-y-4 mx-3 relative">
+ {loading && (
+    <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-50">
+      <Loader />
+    </div>
+  )}
 
             <div className="flex justify-between items-center">
               <h2 className="text-lg font-bold">Add Revenue</h2>
@@ -324,13 +334,30 @@ if (!attachment) return toast.error("Attach document");
               onChange={(e) => setAttachment(e.target.files[0])}
             />
 
-            <button
+            {/* <button
               onClick={handleSave}
               className="w-full bg-blue-600 text-white py-3 rounded-xl"
             >
               Save Revenue
-            </button>
+            </button> */}
+            <button
+  onClick={handleSave}
+  disabled={loading}
+  className={`w-full py-3 rounded-xl text-white ${
+    loading
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-blue-600 hover:bg-blue-700"
+  }`}
+>
+  {loading ? "Saving..." : "Save Revenue"}
+</button>
+
           </div>
+
+
+
+
+
         </div>
       )}
     </div>
