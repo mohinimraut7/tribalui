@@ -33,7 +33,7 @@ export default function RevenueAllocation() {
 
   const user = JSON.parse(localStorage.getItem("authUser"));
 
-
+console.log("user >>>",user)
 
 
 
@@ -68,6 +68,25 @@ export default function RevenueAllocation() {
     if (role) fetchRevenues();
   }, [role]);
 
+
+
+
+//   useEffect(() => {
+//   if (open && user?.departmentName) {
+//     setDepartmentName(user.departmentName);
+//   }
+// }, [open]);
+
+
+
+useEffect(() => {
+  if (user?.departmentName) {
+    setDepartmentName(user.departmentName);
+  }
+}, [user]);
+
+
+
   /* ===============================
       SAVE REVENUE
   =============================== */
@@ -79,7 +98,7 @@ export default function RevenueAllocation() {
 
 
 if (!financialYear) return toast.error("Please select Financial Year");
-if (!departmentName) return toast.error("Enter department name");
+// if (!departmentName) return toast.error("Enter department name");
 if (!totalRevenue) return toast.error("Enter total revenue");
 if (!attachment) return toast.error("Attach document");
 
@@ -108,12 +127,12 @@ if (!attachment) return toast.error("Attach document");
 
       setOpen(false);
       setTotalRevenue("");
-      setDepartmentName("");
+      // setDepartmentName("");
       setAttachment(null);
 
       fetchRevenues(); // refresh list
     } catch (err) {
-      alert("Server error");
+   toast.error(err.response?.data?.message || "Server error");
     } finally {
       setLoading(false);
     }
@@ -249,7 +268,7 @@ if (!attachment) return toast.error("Attach document");
 
 
 
-<div className="w-full">
+{/* <div className="w-full">
   <label className="block text-sm font-medium text-gray-700 mb-1">
     Department
   </label>
@@ -260,7 +279,22 @@ if (!attachment) return toast.error("Attach document");
     disabled
     className="w-full px-3 py-2 border rounded-md bg-gray-100 text-gray-700 cursor-not-allowed"
   />
+</div> */}
+
+
+<div className="w-full">
+  <label className="block text-sm font-medium text-gray-700 mb-1">
+    Department
+  </label>
+
+  <input
+    type="text"
+    value={departmentName}
+    readOnly
+    className="w-full px-3 py-2 border rounded-md bg-gray-100 text-gray-700"
+  />
 </div>
+
 
 
 
