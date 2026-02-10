@@ -80,6 +80,7 @@ const [searchOrderNo, setSearchOrderNo] = useState("");
 
 const [debounceTimer, setDebounceTimer] = useState(null);
 
+const [excelFile, setExcelFile] = useState(null);
 
 
   const { startDate, endDate } = getDateRangeFromFY(financialYear);
@@ -301,6 +302,10 @@ const handleOrderNoChange = async (value) => {
 
     fd.append("attachment", attachment);
 
+    if (excelFile) {
+  fd.append("excelFile", excelFile);
+}
+
     await axiosInstance.post("/revenue/activity", fd);
 
     toast.success("Activity added successfully ✅");
@@ -434,7 +439,7 @@ const handleClearFilters = () => {
             <td className="px-5 py-3 text-green-700 font-semibold">
               ₹{a.pendingAmount}
             </td>
-            <td className="px-6 py-4">
+            {/* <td className="px-6 py-4">
               <a
                 href={a.attachmentUrl}
                 target="_blank"
@@ -443,7 +448,35 @@ const handleClearFilters = () => {
               >
                 {a.attachmentName}
               </a>
-            </td>
+            </td> */}
+
+            <td className="px-6 py-4 space-y-1">
+
+  {/* PDF / Image */}
+  {a.attachmentUrl && (
+    <a
+      href={a.attachmentUrl}
+      target="_blank"
+      rel="noreferrer"
+      className="block text-blue-600 underline"
+    >
+      📄 {a.attachmentName}
+    </a>
+  )}
+
+  {/* Excel */}
+  {a.excelUrl && (
+    <a
+      href={a.excelUrl}
+      download
+      className="block text-green-700 underline"
+    >
+      📊 {a.excelName}
+    </a>
+  )}
+
+</td>
+
           </tr>
         ))}
       </tbody>
@@ -522,6 +555,19 @@ const handleClearFilters = () => {
               type="file"
               onChange={(e) => setAttachment(e.target.files[0])}
             />
+
+
+            <div className="mb-2">
+  <label className="block text-sm font-medium mb-1">
+    Upload Excel (optional)
+  </label>
+  <input
+    type="file"
+    accept=".xls,.xlsx,.csv"
+    onChange={(e) => setExcelFile(e.target.files[0])}
+  />
+</div>
+
 
 <textarea
   placeholder="Details"

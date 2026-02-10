@@ -235,7 +235,7 @@ const isImage = (url = "") =>
                     </a>
                   </td> */}
 
-                  <td className="px-6 py-4">
+                  {/* <td className="px-6 py-4">
   {isPDF(rev.attachmentUrl) ? (
     // 📄 PDF
     <a
@@ -260,7 +260,53 @@ const isImage = (url = "") =>
     // fallback
     <span className="text-gray-400">No file</span>
   )}
-</td>
+</td> */}
+
+{/* --------------- */}
+
+<td className="px-5 py-3 space-y-2">
+                    
+                      {rev.attachmentUrl && (
+                        <div>
+                          <a
+                            href={rev.attachmentUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 underline"
+                          >
+                            <span>📄</span>
+                            <span className="truncate max-w-[150px]">
+                              {rev.attachmentName}
+                            </span>
+                          </a>
+                        </div>
+                      )}
+
+                      {rev.excelUrl && rev.excelName && (
+                        <div>
+                          <a
+                            href={rev.excelUrl}
+                            download={rev.excelName}
+                            className="inline-flex items-center gap-2 text-green-700 hover:text-green-900 underline font-medium"
+                          >
+                            <span>📊</span>
+                            <span className="truncate max-w-[150px]">
+                              {rev.excelName}
+                            </span>
+                          </a>
+                        </div>
+                      )}
+
+                      {!rev.attachmentUrl && !rev.excelUrl && (
+                        <span className="text-gray-400 text-sm">No files</span>
+                      )}
+                    </td>
+
+
+
+
+
+
 
 
 
