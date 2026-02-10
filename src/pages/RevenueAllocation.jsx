@@ -156,6 +156,15 @@ if (!attachment) return toast.error("Attach document");
     return years;
   };
 
+
+  const isPDF = (url = "") =>
+  url.includes("/raw/upload/") || url.endsWith(".pdf");
+
+const isImage = (url = "") =>
+  url.includes("/image/upload/") ||
+  /\.(jpg|jpeg|png|webp)$/i.test(url);
+
+
   return (
     <div className="p-4 sm:p-6 bg-gray-50 min-h-full">
       
@@ -215,7 +224,7 @@ if (!attachment) return toast.error("Attach document");
                     ₹ {Number(rev.totalRevenue).toLocaleString("en-IN")}
                   </td>
 
-                  <td className="px-6 py-4">
+                  {/* <td className="px-6 py-4">
                     <a
                       href={rev.attachmentUrl}
                       target="_blank"
@@ -224,7 +233,66 @@ if (!attachment) return toast.error("Attach document");
                     >
                       {rev.attachmentName}
                     </a>
-                  </td>
+                  </td> */}
+
+                  <td className="px-6 py-4">
+  {isPDF(rev.attachmentUrl) ? (
+    // 📄 PDF
+    <a
+      href={rev.attachmentUrl}
+      target="_blank"
+      rel="noreferrer"
+      className="flex items-center gap-2 text-red-600 underline"
+    >
+      📄 {rev.attachmentName || "View PDF"}
+    </a>
+  ) : isImage(rev.attachmentUrl) ? (
+    // 🖼️ Image
+    <a
+      href={rev.attachmentUrl}
+      target="_blank"
+      rel="noreferrer"
+      className="flex items-center gap-2 text-blue-600 underline"
+    >
+      🖼️ {rev.attachmentName || "View Image"}
+    </a>
+  ) : (
+    // fallback
+    <span className="text-gray-400">No file</span>
+  )}
+</td>
+
+
+
+{/* <td className="px-6 py-4">
+  {isPDF(rev.attachmentUrl) ? (
+    // 📄 PDF
+    <a
+      href={rev.attachmentUrl}
+      target="_blank"
+      rel="noreferrer"
+      className="flex items-center gap-2 text-red-600 underline"
+    >
+      📄 {rev.attachmentName || "View PDF"}
+    </a>
+  ) : isImage(rev.attachmentUrl) ? (
+    // 🖼️ Image
+    <a
+      href={rev.attachmentUrl}
+      target="_blank"
+      rel="noreferrer"
+      className="flex items-center gap-2 text-blue-600 underline"
+    >
+      🖼️ {rev.attachmentName || "View Image"}
+    </a>
+  ) : (
+    <span className="text-gray-400">No file</span>
+  )}
+</td>
+ */}
+
+
+
 
                   {/* <td className="px-6 py-4">
                     <button
