@@ -282,7 +282,7 @@ const isImage = (url = "") =>
                         </div>
                       )}
 
-                      {rev.excelUrl && rev.excelName && (
+                      {/* {rev.excelUrl && rev.excelName && (
                         <div>
                           <a
                             href={rev.excelUrl}
@@ -295,9 +295,9 @@ const isImage = (url = "") =>
                             </span>
                           </a>
                         </div>
-                      )}
+                      )} */}
 
-                      {!rev.attachmentUrl && !rev.excelUrl && (
+                      {!rev.attachmentUrl && (
                         <span className="text-gray-400 text-sm">No files</span>
                       )}
                     </td>
