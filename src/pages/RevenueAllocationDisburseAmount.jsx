@@ -465,7 +465,7 @@ const handleClearFilters = () => {
   )}
 
   {/* Excel */}
-  {a.excelUrl && (
+  {/* {a.excelUrl && (
     <a
       href={a.excelUrl}
       download
@@ -473,7 +473,7 @@ const handleClearFilters = () => {
     >
       📊 {a.excelName}
     </a>
-  )}
+  )} */}
 
 </td>
 
