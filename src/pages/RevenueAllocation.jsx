@@ -26,7 +26,7 @@ export default function RevenueAllocation() {
 
   useEffect(() => {
     const savedRole = localStorage.getItem("userRole");
-    setRole(savedRole || "Collector Office");
+    setRole(savedRole);
   }, []);
 
   const userrole = localStorage.getItem("userRole");
@@ -51,7 +51,7 @@ console.log("user >>>",user)
 
       if (data?.length) {
         const roleWiseData = data
-          .filter((r) => r.role === role)
+          // .filter((r) => r.role === role)
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
         setRevenues(roleWiseData);
