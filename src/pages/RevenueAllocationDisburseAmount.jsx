@@ -440,73 +440,175 @@ const handleClearFilters = () => {
             <td className="px-5 py-3 text-green-700 font-semibold">
               ₹{a.pendingAmount}
             </td>
-            {/* <td className="px-6 py-4">
-              <a
-                href={a.attachmentUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-blue-600 underline"
-              >
-                {a.attachmentName}
-              </a>
-            </td> */}
-
- {/* <td className="px-6 py-4 space-y-1">
-  {a.attachmentUrl && (
-    <a
-      href={a.attachmentUrl}
-      target="_blank"
-      rel="noreferrer"
-      className="block text-blue-600 underline"
-    >
-      📄 {a.attachmentName}
-    </a>
-  )}
-</td> */}
+           
 
 <td className="px-6 py-4 space-y-1">
 
-  {/* PDF / Image */}
-  {/* {a.attachmentUrl && (
-    <a
-      href={a.attachmentUrl}
-      target="_blank"
-      rel="noreferrer"
-      className="block text-blue-600 underline"
-    >
-      📄 {a.attachmentName}
-    </a>
-  )} */}
+
+
+{/* {a.attachmentUrl && (
+  <div className="flex items-center gap-2">
 
   
-{a.attachmentUrl && (
-  <button
-    onClick={async () => {
-      try {
-        const response = await fetch(a.attachmentUrl);
-        const blob = await response.blob();
+    <button
+      onClick={() => window.open(a.attachmentUrl, "_blank")}
+      className="text-blue-600 underline text-left"
+    >
+      📄 {a.attachmentName}
+    </button>
 
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = a.attachmentName;   // ✅ force original name
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      } catch (err) {
-        console.error("Download failed", err);
-      }
-    }}
-    className="block text-blue-600 underline text-left"
-  >
-    📄 {a.attachmentName}
-  </button>
+   
+    <button
+      onClick={async () => {
+        try {
+          const response = await fetch(a.attachmentUrl);
+          const fileBlob = await response.blob();
+
+        
+          const blob = new Blob([fileBlob], {
+            type: a.attachmentName?.toLowerCase().endsWith(".pdf")
+              ? "application/pdf"
+              : fileBlob.type,
+          });
+
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = a.attachmentName; 
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        } catch (err) {
+          console.error("Download failed", err);
+        }
+      }}
+      className="text-gray-600 hover:text-black"
+      title="Download"
+    >
+      ⬇
+    </button>
+
+  </div>
+)} */}
+
+{/* -------------------- */}
+
+
+{/* {a.attachmentUrl && (
+  <div className="flex items-center gap-2">
+
+   
+    <button
+      onClick={() => {
+        const previewUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
+          a.attachmentUrl
+        )}&embedded=true`;
+        window.open(previewUrl, "_blank");
+      }}
+      className="text-blue-600 underline text-left"
+    >
+      📄 {a.attachmentName}
+    </button>
+
+  
+    <button
+      onClick={async () => {
+        try {
+          const response = await fetch(a.attachmentUrl);
+          const fileBlob = await response.blob();
+
+          const blob = new Blob([fileBlob], {
+            type: "application/pdf",
+          });
+
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = a.attachmentName;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        } catch (err) {
+          console.error("Download failed", err);
+        }
+      }}
+      className="text-gray-600 hover:text-black"
+      title="Download"
+    >
+      ⬇
+    </button>
+
+  </div>
+)} */}
+
+{/* -------------- */}
+
+{a.attachmentUrl && (
+  <div className="flex items-center gap-2">
+
+    {/* Preview */}
+    <button
+      onClick={() => {
+        const isPdf = a.attachmentName
+          ?.toLowerCase()
+          .endsWith(".pdf");
+
+        if (isPdf) {
+          // ✅ PDF → Google Viewer
+          const previewUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
+            a.attachmentUrl
+          )}&embedded=true`;
+          window.open(previewUrl, "_blank");
+        } else {
+          // ✅ Image → Direct open
+          window.open(a.attachmentUrl, "_blank");
+        }
+      }}
+      className="text-blue-600 underline text-left"
+    >
+      📄 {a.attachmentName}
+    </button>
+
+    {/* Download */}
+    <button
+      onClick={async () => {
+        try {
+          const response = await fetch(a.attachmentUrl);
+          const fileBlob = await response.blob();
+
+          const blob = new Blob([fileBlob], {
+            type: a.attachmentName?.toLowerCase().endsWith(".pdf")
+              ? "application/pdf"
+              : fileBlob.type,
+          });
+
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = a.attachmentName;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        } catch (err) {
+          console.error("Download failed", err);
+        }
+      }}
+      className="text-gray-600 hover:text-black"
+      title="Download"
+    >
+      ⬇
+    </button>
+
+  </div>
 )}
 
 
+{/* ------------------------------ */}
 
-{a.excelUrl && (
+{/* {a.excelUrl && (
   <button
     onClick={async () => {
       try {
@@ -529,8 +631,51 @@ const handleClearFilters = () => {
   >
     📊 {a.excelName}
   </button>
-)}
+)} */}
 
+{a.excelUrl && (
+  <div className="flex items-center gap-2">
+
+    {/* Preview */}
+    <button
+      onClick={() => {
+        const previewUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
+          a.excelUrl
+        )}&embedded=true`;
+        window.open(previewUrl, "_blank");
+      }}
+      className="text-green-700 underline text-left"
+    >
+      📊 {a.excelName}
+    </button>
+
+    {/* Download (UNCHANGED LOGIC) */}
+    <button
+      onClick={async () => {
+        try {
+          const response = await fetch(a.excelUrl);
+          const blob = await response.blob();
+
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = a.excelName;   // ✅ force correct name
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        } catch (err) {
+          console.error("Download failed", err);
+        }
+      }}
+      className="text-gray-600 hover:text-black"
+      title="Download"
+    >
+      ⬇
+    </button>
+
+  </div>
+)}
 
 
 </td>
