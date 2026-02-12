@@ -266,7 +266,7 @@ const isImage = (url = "") =>
 
 <td className="px-5 py-3 space-y-2">
                     
-                      {rev.attachmentUrl && (
+                      {/* {rev.attachmentUrl && (
                         <div>
                           <a
                             href={rev.attachmentUrl}
@@ -280,7 +280,72 @@ const isImage = (url = "") =>
                             </span>
                           </a>
                         </div>
-                      )}
+                      )} */}
+
+
+{rev.attachmentUrl && (
+  <div className="flex items-center gap-2">
+
+    {/* Preview */}
+    <button
+      onClick={() => {
+        const isPdf = rev.attachmentName
+          ?.toLowerCase()
+          .endsWith(".pdf");
+
+        if (isPdf) {
+          // ✅ PDF → Google Viewer
+          const previewUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
+            rev.attachmentUrl
+          )}&embedded=true`;
+          window.open(previewUrl, "_blank");
+        } else {
+          // ✅ Image → Direct open
+          window.open(rev.attachmentUrl, "_blank");
+        }
+      }}
+      className="text-blue-600 underline text-left"
+    >
+      📄 {rev.attachmentName}
+    </button>
+
+    {/* Download */}
+    <button
+      onClick={async () => {
+        try {
+          const response = await fetch(rev.attachmentUrl);
+          const fileBlob = await response.blob();
+
+          const blob = new Blob([fileBlob], {
+            type: rev.attachmentName?.toLowerCase().endsWith(".pdf")
+              ? "application/pdf"
+              : fileBlob.type,
+          });
+
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = rev.attachmentName;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        } catch (err) {
+          console.error("Download failed", err);
+        }
+      }}
+      className="text-gray-600 hover:text-black"
+      title="Download"
+    >
+      ⬇
+    </button>
+
+  </div>
+)}
+
+
+
+
 
                       {/* {rev.excelUrl && rev.excelName && (
                         <div>
