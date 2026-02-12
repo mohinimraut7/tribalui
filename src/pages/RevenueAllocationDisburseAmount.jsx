@@ -80,7 +80,7 @@ const [searchOrderNo, setSearchOrderNo] = useState("");
 
 const [debounceTimer, setDebounceTimer] = useState(null);
 
-// const [excelFile, setExcelFile] = useState(null);
+const [excelFile, setExcelFile] = useState(null);
 
 
   const { startDate, endDate } = getDateRangeFromFY(financialYear);
@@ -302,9 +302,9 @@ const handleOrderNoChange = async (value) => {
 
     fd.append("attachment", attachment);
 
-//     if (excelFile) {
-//   fd.append("excelFile", excelFile);
-// }
+    if (excelFile) {
+  fd.append("excelFile", excelFile);
+}
 
     await axiosInstance.post("/revenue/activity", fd);
 
@@ -320,6 +320,7 @@ const handleOrderNoChange = async (value) => {
     setSubject("");
     setDetails("");
     setAttachment(null);
+    setExcelFile(null);   // ✅ add this
 
   } catch (err) {
     toast.error("Failed to add activity");
@@ -450,9 +451,7 @@ const handleClearFilters = () => {
               </a>
             </td> */}
 
-            <td className="px-6 py-4 space-y-1">
-
-  {/* PDF / Image */}
+ {/* <td className="px-6 py-4 space-y-1">
   {a.attachmentUrl && (
     <a
       href={a.attachmentUrl}
@@ -463,19 +462,81 @@ const handleClearFilters = () => {
       📄 {a.attachmentName}
     </a>
   )}
+</td> */}
 
-  {/* Excel */}
-  {/* {a.excelUrl && (
+<td className="px-6 py-4 space-y-1">
+
+  {/* PDF / Image */}
+  {/* {a.attachmentUrl && (
     <a
-      href={a.excelUrl}
-      download
-      className="block text-green-700 underline"
+      href={a.attachmentUrl}
+      target="_blank"
+      rel="noreferrer"
+      className="block text-blue-600 underline"
     >
-      📊 {a.excelName}
+      📄 {a.attachmentName}
     </a>
   )} */}
 
+  
+{a.attachmentUrl && (
+  <button
+    onClick={async () => {
+      try {
+        const response = await fetch(a.attachmentUrl);
+        const blob = await response.blob();
+
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = a.attachmentName;   // ✅ force original name
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } catch (err) {
+        console.error("Download failed", err);
+      }
+    }}
+    className="block text-blue-600 underline text-left"
+  >
+    📄 {a.attachmentName}
+  </button>
+)}
+
+
+
+{a.excelUrl && (
+  <button
+    onClick={async () => {
+      try {
+        const response = await fetch(a.excelUrl);
+        const blob = await response.blob();
+
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = a.excelName;   // ✅ force correct name
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } catch (err) {
+        console.error("Download failed", err);
+      }
+    }}
+    className="block text-green-700 underline text-left"
+  >
+    📊 {a.excelName}
+  </button>
+)}
+
+
+
 </td>
+
+
+
 
           </tr>
         ))}
@@ -551,22 +612,55 @@ const handleClearFilters = () => {
   onChange={(e) => setSubject(e.target.value)}
   className="w-full border p-2 mb-2"
 />
-<input
+{/* <input
               type="file"
               onChange={(e) => setAttachment(e.target.files[0])}
-            />
+            /> */}
 
 
-            {/* <div className="mb-2">
-  <label className="block text-sm font-medium mb-1">
-    Upload Excel (optional)
+<div className="mb-3">
+  <label className="block text-sm font-semibold text-gray-700 mb-2">
+    Upload Attachment
   </label>
+
+  <input
+    type="file"
+    onChange={(e) => setAttachment(e.target.files[0])}
+    className="w-full text-sm text-gray-600
+               file:mr-4 file:py-2 file:px-4
+               file:rounded-lg file:border-0
+               file:text-sm file:font-semibold
+               file:bg-blue-50 file:text-blue-700
+               hover:file:bg-blue-100
+               cursor-pointer"
+  />
+</div>
+
+
+
+<div className="mb-3">
+  <label className="block text-sm font-semibold text-gray-700 mb-2">
+    Upload Excel File
+  </label>
+
   <input
     type="file"
     accept=".xls,.xlsx,.csv"
     onChange={(e) => setExcelFile(e.target.files[0])}
+    className="w-full text-sm text-gray-600
+               file:mr-4 file:py-2 file:px-4
+               file:rounded-lg file:border-0
+               file:text-sm file:font-semibold
+               file:bg-green-50 file:text-green-700
+               hover:file:bg-green-100
+               cursor-pointer"
   />
-</div> */}
+</div>
+
+
+
+
+          
 
 
 <textarea
