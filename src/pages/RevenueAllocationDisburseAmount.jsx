@@ -608,7 +608,7 @@ const handleClearFilters = () => {
 
 {/* ------------------------------ */}
 
-{/* {a.excelUrl && (
+{a.excelUrl && (
   <button
     onClick={async () => {
       try {
@@ -631,51 +631,8 @@ const handleClearFilters = () => {
   >
     📊 {a.excelName}
   </button>
-)} */}
-
-{a.excelUrl && (
-  <div className="flex items-center gap-2">
-
-    {/* Preview */}
-    <button
-      onClick={() => {
-        const previewUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
-          a.excelUrl
-        )}&embedded=true`;
-        window.open(previewUrl, "_blank");
-      }}
-      className="text-green-700 underline text-left"
-    >
-      📊 {a.excelName}
-    </button>
-
-    {/* Download (UNCHANGED LOGIC) */}
-    <button
-      onClick={async () => {
-        try {
-          const response = await fetch(a.excelUrl);
-          const blob = await response.blob();
-
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.href = url;
-          link.download = a.excelName;   // ✅ force correct name
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
-        } catch (err) {
-          console.error("Download failed", err);
-        }
-      }}
-      className="text-gray-600 hover:text-black"
-      title="Download"
-    >
-      ⬇
-    </button>
-
-  </div>
 )}
+
 
 
 </td>
